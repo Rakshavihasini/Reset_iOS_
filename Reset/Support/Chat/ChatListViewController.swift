@@ -70,7 +70,15 @@ class ChatListViewController: UIViewController, UISearchBarDelegate, UITableView
         setupActivityIndicator()
         addTapGestureToDismissKeyboard()
         configureTipKit()
-    }
+    
+        navigationItem.rightBarButtonItem =
+            UIBarButtonItem(
+                title: "AI",
+                style: .plain,
+                target: self,
+                action: #selector(openAI)
+            )
+}
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -355,6 +363,11 @@ class ChatListViewController: UIViewController, UISearchBarDelegate, UITableView
             self.noResultsLabel.isHidden = false
             self.tableView.reloadData()
         }
+    }
+    
+    @objc private func openAI() {
+    let vc = AIChatViewController()
+    navigationController?.pushViewController(vc, animated: true)
     }
 
     // MARK: - TableView Delegates
